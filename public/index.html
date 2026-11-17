@@ -50,7 +50,7 @@ s0.parentNode.insertBefore(s1,s0);
   </script>
 </head>
 <body>
-     <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 function aesDecode(encodedText) {
@@ -138,21 +138,16 @@ document.body.style.overflow = "hidden";
         }, 10);
     }
 
-    function hideModal(e) {
-        localStorage.setItem("cookie-consent", e);
-        setTimeout(() => {
-            modalBox.classList.add("hidden");
-        }, 1500);
+    function hideModal() {
+        modalBox.classList.add("hidden");
     }
 
-    acceptBtn.onclick = () => hideModal("accepted");
-    declineBtn.onclick = () => hideModal("declined");
-    closeBtn.onclick = () => hideModal("closed");
-    backdrop.onclick = () => hideModal("closed");
+    acceptBtn.onclick = hideModal;
+    declineBtn.onclick = hideModal;
+    closeBtn.onclick = hideModal;
+    backdrop.onclick = hideModal;
 
-    if (!localStorage.getItem("cookie-consent")) {
-        showModal();
-    }
+    showModal();
 </script>
   <header class="site-header">
     <div class="container nav-wrap">
