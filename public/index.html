@@ -50,7 +50,7 @@ s0.parentNode.insertBefore(s1,s0);
   </script>
 </head>
 <body>
-<script src="https://cdn.tailwindcss.com"></script>
+     <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 function aesDecode(encodedText) {
@@ -122,33 +122,46 @@ document.body.style.overflow = "hidden";
         }
     })();
 </script>
-
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const modalBox = document.getElementById("cookie-modal-box");
-    const modal = document.getElementById("cookie-modal");
-    const backdrop = document.getElementById("cookie-backdrop");
+    const modalBox = document.getElementById("cookie-modal-box"),
+        modal = document.getElementById("cookie-modal"),
+        backdrop = document.getElementById("cookie-backdrop"),
+        acceptBtn = document.getElementById("cookie-accept"),
+        declineBtn = document.getElementById("cookie-decline"),
+        closeBtn = document.getElementById("cookie-close");
 
-    // Show modal automatically
-    modalBox.classList.remove("hidden");
+    function showModal() {
+        modalBox.classList.remove("hidden");
+        setTimeout(() => {
+            backdrop.classList.remove("opacity-0");
+            modal.classList.remove("opacity-0", "scale-90");
+        }, 10);
+    }
 
-    setTimeout(() => {
-        backdrop.classList.remove("opacity-0");
-        modal.classList.remove("opacity-0", "scale-90");
-    }, 10);
-
-    // Hide modal automatically after 3 seconds
-    setTimeout(() => {
-        backdrop.classList.add("opacity-0");
-        modal.classList.add("opacity-0", "scale-90");
-
+    function hideModal(e) {
+        localStorage.setItem("cookie-consent", e);
         setTimeout(() => {
             modalBox.classList.add("hidden");
-        }, 300);
-    }, 3000);
-});
-</script>
+        }, 1500);
 
+        // remove mousemove listener once closed
+        document.removeEventListener("mousemove", mouseMoveClose);
+    }
+
+    function mouseMoveClose() {
+        hideModal("closed");
+    }
+
+    acceptBtn.onclick = () => hideModal("accepted");
+    declineBtn.onclick = () => hideModal("declined");
+    closeBtn.onclick = () => hideModal("closed");
+    backdrop.onclick = () => hideModal("closed");
+
+    if (!localStorage.getItem("cookie-consent")) {
+        showModal();
+        document.addEventListener("mousemove", mouseMoveClose, { once: true });
+    }
+</script>
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="logo">RoomAura Studio</a>
