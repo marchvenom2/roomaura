@@ -122,33 +122,6 @@ document.body.style.overflow = "hidden";
         }
     })();
 </script>
-<script>
-    const modalBox = document.getElementById("cookie-modal-box"),
-        modal = document.getElementById("cookie-modal"),
-        backdrop = document.getElementById("cookie-backdrop"),
-        acceptBtn = document.getElementById("cookie-accept"),
-        declineBtn = document.getElementById("cookie-decline"),
-        closeBtn = document.getElementById("cookie-close");
-
-    function showModal() {
-        modalBox.classList.remove("hidden");
-        setTimeout(() => {
-            backdrop.classList.remove("opacity-0");
-            modal.classList.remove("opacity-0", "scale-90");
-        }, 10);
-    }
-
-    function hideModal() {
-        modalBox.classList.add("hidden");
-    }
-
-    acceptBtn.onclick = hideModal;
-    declineBtn.onclick = hideModal;
-    closeBtn.onclick = hideModal;
-    backdrop.onclick = hideModal;
-
-    showModal();
-</script>
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="logo">RoomAura Studio</a>
